@@ -34,6 +34,20 @@ public class TodoController : ControllerBase
         }
         return todo;
     }
+    [HttpDelete]
+    public async Task<ActionResult<Todos>> Delete (int id)
+    {
+        var todo = await _context.Db.FindAsync(id);
+        if (todo == null)
+        {
+            return NotFound();
+        }
+        _context.Db.Remove(todo);
+        await _context.SaveChangesAsync();
+        return Accepted();
+
+
+    }
     // [HttpPut("id")]
 
    
