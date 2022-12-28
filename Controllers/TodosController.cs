@@ -13,6 +13,13 @@ public class TodoController : ControllerBase
         _context = context;
     }
 
+    [HttpGet]
+    public  async Task<List<Todos>> Get ()
+    {
+        
+        return await _context.Db.ToListAsync();
+    }
+
     [HttpPost]
     public async Task<ActionResult<DataContext>> Post (Todos item) 
     {
